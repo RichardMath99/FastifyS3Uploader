@@ -1,4 +1,4 @@
-# Fastify S3 File Upload API
+# Fastify S3 File Upload API 
 
 This is a simple file upload API built using Fastify, AWS SDK for S3, Cloudflare, and Prisma. It provides endpoints for uploading files to an S3 bucket and retrieving signed URLs for uploaded files.
 

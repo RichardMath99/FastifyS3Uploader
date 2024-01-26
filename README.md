@@ -1,82 +1,82 @@
 # Fastify S3 File Upload API 
 
-This is a simple file upload API built using Fastify, AWS SDK for S3, Cloudflare, and Prisma. It provides endpoints for uploading files to an S3 bucket and retrieving signed URLs for uploaded files.
+Esta é uma API simples para upload de arquivos construída usando Fastify, AWS SDK para S3, Cloudflare e Prisma. Ela fornece endpoints para enviar arquivos para um bucket S3 e obter URLs assinadas para os arquivos enviados.
 
-## Requirements
+## Requisitos
 
-- [Node.js](https://nodejs.org/) (v14 or newer)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) package manager
-- [AWS S3](https://aws.amazon.com/s3/) bucket
-- [Cloudflare](https://www.cloudflare.com/) account (for Cloudflare Workers)
+- [Node.js](https://nodejs.org/) (v14 ou mais recente)
+- Gerenciador de pacotes [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- Bucket [AWS S3](https://aws.amazon.com/s3/)
+- Conta [Cloudflare](https://www.cloudflare.com/) (para Cloudflare Workers)
 
-## Installation
+## Instalação
 
-1. Clone the repository:
+1. Clone o repositório:
 
    ```bash
    git clone https://github.com/RichardMath99/FastifyS3Uploader
    cd FastifyS3Uploader
    ```
 
-2. Install dependencies:
+2. Instale as dependências:
 
    ```bash
    npm install
    ```
 
-3. Set up environment variables:
+3. Configure as variáveis de ambiente:
 
-   Create a `.env` file in the root of the project and add the following variables:
+   Crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis:
 
    ```env
-   AWS_REGION=your-aws-region
-   AWS_S3_BUCKET=your-s3-bucket
+   AWS_REGION=sua-regiao-aws
+   AWS_S3_BUCKET=seu-bucket-s3
    ```
 
-## Usage
+## Uso
 
-1. Start the Fastify server:
+1. Inicie o servidor Fastify:
 
    ```bash
    npm start
    ```
 
-   The server will be running at [http://localhost:3333](http://localhost:3333).
+   O servidor estará em execução em [http://localhost:3333](http://localhost:3333).
 
 2. Endpoints:
 
-   - `GET /`: Returns a simple "Hello World" message.
+   - `GET /`: Retorna uma mensagem simples "Hello World".
 
-   - `POST /uploads`: Uploads a file to the S3 bucket. Requires a JSON body with `name` and `contentType` fields.
+   - `POST /uploads`: Faz o upload de um arquivo para o bucket S3. Requer um corpo JSON com os campos `name` e `contentType`.
 
-   - `GET /uploads/:id`: Retrieves a signed URL for downloading the file with the specified `id`.
+   - `GET /uploads/:id`: Obtém um URL assinado para baixar o arquivo com o `id` especificado.
 
-## Example Usage
+## Exemplo de Uso
 
-### Uploading a File
+### Enviando um Arquivo
 
 ```bash
-curl -X POST http://localhost:3333/uploads -H "Content-Type: application/json" -d '{"name": "example.txt", "contentType": "text/plain"}'
+curl -X POST http://localhost:3333/uploads -H "Content-Type: application/json" -d '{"name": "exemplo.txt", "contentType": "text/plain"}'
 ```
 
-The response will contain a signed URL and the corresponding file ID.
+A resposta conterá um URL assinado e o ID correspondente do arquivo.
 
-### Downloading a File
+### Baixando um Arquivo
 
-Replace `<file-id>` with the actual file ID obtained from the upload response.
+Substitua `<file-id>` pelo ID real do arquivo obtido na resposta do upload.
 
 ```bash
 curl http://localhost:3333/uploads/<file-id>
 ```
 
-The response will be a signed URL for downloading the file.
+A resposta será um URL assinado para baixar o arquivo.
 
-## Notes
+## Observações
 
-- The server uses a Prisma client to interact with the database. Ensure that your database connection is properly configured in the Prisma client instantiation (`const prisma = new PrismaClient()`).
+- O servidor usa um cliente Prisma para interagir com o banco de dados. Certifique-se de que sua conexão com o banco de dados esteja configurada corretamente na instância do cliente Prisma (`const prisma = new PrismaClient()`).
 
-- This example assumes you have already set up AWS S3 and Cloudflare. Update the `.env` file with your AWS region and S3 bucket details.
+- Este exemplo pressupõe que você já configurou o AWS S3 e o Cloudflare. Atualize o arquivo `.env` com os detalhes da sua região AWS e do bucket S3.
 
-- Ensure that your Cloudflare Worker (`r2`) is correctly configured for generating signed URLs.
+- Certifique-se de que seu Cloudflare Worker (`r2`) esteja configurado corretamente para gerar URLs assinados.
 
-Feel free to customize the code according to your specific requirements.
+Sinta-se à vontade para personalizar o código de acordo com seus requisitos específicos.
